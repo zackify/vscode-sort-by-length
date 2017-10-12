@@ -2,7 +2,7 @@
   "name": "sort-imports-by-length",
   "displayName": "Sort Imports by Length",
   "description": "Sort ES6 imports by length automatically.",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "galleryBanner": {
     "color": "#2980b9",
     "theme": "dark"
