@@ -1,5 +1,5 @@
 'use strict';
-
+import sorts from './sorts';
 import {
   Range,
   TextDocument,
@@ -9,7 +9,7 @@ import {
   window,
   workspace,
 } from 'vscode';
-import { dirname, extname } from 'path';
+import { extname } from 'path';
 import {
   getLanguagesSetting,
   getOnSaveSetting,
@@ -21,16 +21,11 @@ function sort(document: TextDocument): string {
   if (!getLanguagesSetting().some(l => document.languageId.includes(l))) {
     return;
   }
+  const extension = extname(document.fileName).substring(1);
 
   let text = document.getText().split(/\n/);
 
-  let imports = text
-    .filter(line => line.startsWith('import'))
-    .sort((a, b) => a.length - b.length);
-
-  let code = text.filter(line => !line.startsWith('import'));
-
-  return `${imports.join('\n')}\n${code.join('\n')}`;
+  return sorts[extension](text);
 }
 
 function getMaxRange(): Range {
